@@ -8,6 +8,7 @@ const api = {
 function App() {
   const [query, setQuery] = useState("");
   const [weather, setWeather] = useState({});
+  const [weatherState, setWeatherState] = useState("");
 
   const search = (evt) => {
     if (evt.key === "Enter") {
@@ -16,11 +17,11 @@ function App() {
         .then((result) => {
           setQuery("");
           setWeather(result);
+          // setWeatherState(weather.weather[0].main);
           console.log(weather);
         });
     }
   };
-
   const dateBuilder = (d) => {
     let months = [
       "January",
@@ -54,7 +55,7 @@ function App() {
   };
 
   return (
-    <div className="app">
+    <div className={typeof weather.main != "undefined" ? "app warm" : "app"}>
       <main>
         <div className="search-box">
           <input
